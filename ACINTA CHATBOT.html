@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ACINTA — Your AI MENTAL WELLNESS Companion</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Georgia,serif;background:#e8f0e8;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:16px}
+    #mw{width:100%;max-width:660px;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 8px 40px rgba(60,90,65,.18);display:flex;flex-direction:column;height:92vh;max-height:820px}
+    #mh{background:linear-gradient(135deg,#a5dcf1,#7c9a7e);color:#fff;padding:20px 24px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+    #mh .icon{background:rgba(255,255,255,.15);border-radius:10px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+    #mh h1{font-size:20px;font-weight:normal}
+    #mh p{font-size:12px;opacity:.8;margin-top:3px}
+    #md{background:#fffbeb;border-left:3px solid #d4a017;padding:8px 16px;font-size:11.5px;color:#7a5800;line-height:1.5;flex-shrink:0}
+    #mm{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth}
+    #mm::-webkit-scrollbar{width:4px}
+    #mm::-webkit-scrollbar-thumb{background:#c8ddc9;border-radius:10px}
+    .xm{display:flex;flex-direction:column;max-width:84%}
+    .xm.u{align-self:flex-end;align-items:flex-end}
+    .xm.b{align-self:flex-start;align-items:flex-start}
+    .xl{font-size:10px;color:#8a9e8c;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+    .xb{padding:11px 16px;border-radius:18px;font-size:15px;line-height:1.65}
+    .xm.u .xb{background:#95f1fd;color:#fff;border-bottom-right-radius:4px}
+    .xm.b .xb{background:#6edefa;color:#2c3e35;border:1px solid #e0ebe1;border-bottom-left-radius:4px}
+    .xc{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+    .xk{background:#fff;border:1.5px solid #a8c5aa;color:#5dbcf3;border-radius:16px;padding:5px 13px;font-size:13px;cursor:pointer;font-family:Georgia,serif;transition:all .15s}
+    .xk:hover{background:#7c9a7e;color:#fff;border-color:#7c9a7e}
+    #mt{display:none;align-self:flex-start;padding:11px 16px;background:#f2f7f2;border:1px solid #e0ebe1;border-radius:18px;border-bottom-left-radius:4px}
+    .xd{display:flex;gap:5px}
+    .xd span{width:7px;height:7px;background:#a8c5aa;border-radius:50%;animation:xb 1.2s infinite}
+    .xd span:nth-child(2){animation-delay:.2s}
+    .xd span:nth-child(3){animation-delay:.4s}
+    @keyframes xb{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+    #mi{padding:12px 16px;border-top:1px solid #e0ebe1;display:flex;gap:8px;align-items:flex-end;background:#faf8f4;flex-shrink:0}
+    #mta{flex:1;border:1.5px solid #d4e4d5;border-radius:12px;padding:10px 14px;font-size:15px;font-family:Georgia,serif;resize:none;min-height:44px;max-height:120px;outline:none;color:#2c3e35;background:#fff}
+    #mta:focus{border-color:#7c9a7e}
+    #mta::placeholder{color:#aab8ab}
+    #msb{background:#5fbaf3;color:#fff;border:none;border-radius:50%;width:44px;height:44px;cursor:pointer;font-size:17px;flex-shrink:0;transition:opacity .15s}
+    #msb:hover{opacity:.85}
+    #msb:disabled{opacity:.35;cursor:default}
+    #mcr{background:#fff5f5;border-top:1px solid #fdd;padding:7px 18px;font-size:11.5px;color:#c0392b;text-align:center;font-weight:500;flex-shrink:0}
+  </style>
+</head>
+<body>
+<div id="mw">
+  <div id="mh">
+    <div class="icon">🌿</div>
+    <div>
+      <h1>ACINTA</h1>
+      <p>A safe space to talk about how you feel</p>
+    </div>
+  </div>
+  <div id="md">⚠️ Not a substitute for professional mental health care. In crisis, contact a helpline immediately.</div>
+  <div id="mm"></div>
+  <div id="mt"><div class="xd"><span></span><span></span><span></span></div></div>
+  <div id="mi">
+    <textarea id="mta" placeholder="Share what's on your mind…" rows="1"></textarea>
+    <button id="msb">&#x27A4;</button>
+  </div>
+  <div id="mcr">🆘KIRAN	1800-5990019 &nbsp;|&nbsp; Vandrevala Foundation: 1860-2662-345</div>
+</div>
+
+<script>
+(function(){
+
+  /* ============================================================
+     RULES — edit responses here to customise the chatbot
+     Each rule has:
+       p : array of RegExp patterns to match user input
+       r : array of responses (one picked randomly)
+       c : (optional) quick-reply chip suggestions
+  ============================================================ */
+  var rules = [
+    {
+      p: [/suicid/i,/kill myself/i,/want to die/i,/end my life/i,/self.?harm/i,/hurt myself/i,/don't want to live/i],
+      r: ["I'm genuinely concerned about your safety right now. Please reach out immediately — iCall: 9152987821 or Vandrevala Foundation: 1860-2662-345. You don't have to face this alone. Are you safe right now?",
+          "What you're feeling sounds very serious, and your life matters. Please contact iCall (9152987821) or Vandrevala Foundation (1860-2662-345) right now. Is there someone near you?"]
+    },
+    {
+      p: [/^(hi|hello|hey|namaste|good morning|good evening|good afternoon|hii+)/i],
+      r: ["Hello! I'm so glad you reached out. How are you feeling today? You can share anything here. 🌿",
+          "Hi there! This is your safe space. What's on your mind today?",
+          "Hey! I'm here and I'm listening. What's on your mind?"],
+      c: ["I'm feeling low","I'm anxious","I feel lonely","I'm stressed"]
+    },
+    {
+      p: [/depress/i,/feel low/i,/feeling low/i,/so sad/i,/very sad/i,/feel sad/i,/feeling sad/i,/hopeless/i,/empty inside/i,/nothing matters/i,/unmotivated/i],
+      r: ["I'm really sorry you're carrying that heaviness. Your feelings are completely valid. Can you tell me more about when this started?",
+          "That sounds really hard, and what you're feeling is real. When did you start feeling this way? Has anything changed recently?",
+          "Feeling low and hopeless is exhausting. What does your day-to-day look like lately?"],
+      c: ["I cry a lot","I feel empty","I lost interest in things","I don't sleep well"]
+    },
+    {
+      p: [/anxious/i,/anxiety/i,/panic/i,/worried/i,/overthink/i,/racing thoughts/i,/scared/i,/nervous/i,/dread/i],
+      r: ["Anxiety can feel like your mind just won't slow down. What tends to trigger these worried thoughts for you?",
+          "That constant worry that won't let you rest is genuinely exhausting. What does the anxiety feel like in your body?",
+          "Overthinking takes so much energy. Has something specific been weighing on you lately?"],
+      c: ["Try a breathing exercise","It's about work","It's about relationships","It's everything at once"]
+    },
+    {
+      p: [/lonely/i,/alone/i,/no one cares/i,/nobody understands/i,/isolated/i,/no friends/i,/disconnected/i],
+      r: ["Loneliness is one of the most painful human experiences, and I'm glad you reached out. Did this come on suddenly, or has it been building?",
+          "Feeling unseen and disconnected is genuinely painful. When was the last time you felt truly connected to someone?",
+          "Feeling alone even when people are around is one of the loneliest feelings. What do you think gets in the way?"],
+      c: ["I feel invisible","I lost a friend","I moved somewhere new","I'm just different"]
+    },
+    {
+      p: [/stress/i,/stressed/i,/overwhelm/i,/too much/i,/burnout/i,/burned out/i,/exhausted/i,/pressure/i],
+      r: ["It sounds like you're carrying a very heavy load. What's the biggest source of pressure right now?",
+          "Feeling overwhelmed is your mind saying something needs to change — you're not failing. What's been piling up?",
+          "Is the stress coming from external things like work or family, or from pressure you put on yourself?"],
+      c: ["It's work","It's family","It's financial","It's everything"]
+    },
+    {
+      p: [/grief/i,/lost someone/i,/someone died/i,/passed away/i,/miss them/i,/mourning/i],
+      r: ["I'm so deeply sorry for your loss. Grief has no right timeline. Would you like to tell me about them?",
+          "Losing someone is one of the hardest things a person can go through. Please be gentle with yourself. How are you coping?"]
+    },
+    {
+      p: [/breakup/i,/broke up/i,/heartbroken/i,/cheated/i,/betrayed/i,/divorce/i],
+      r: ["Relationship pain cuts very deep. I'm sorry you're going through this. Do you want to share what happened?",
+          "That sounds really painful. What's weighing on you most right now?"]
+    },
+    {
+      p: [/work/i,/job/i,/boss/i,/fired/i,/career/i,/unemployed/i],
+      r: ["Work stress can seep into every corner of life. That sounds really draining. What's been happening?",
+          "So much of our self-worth gets tied to our work, which makes job stress feel very personal. Can you tell me more?"]
+    },
+    {
+      p: [/breath/i,/breathing exercise/i,/calm down/i,/help me relax/i,/panic right now/i],
+      r: ["Let's try 4-7-8 breathing together:\n\n🫁 Breathe IN for 4 counts\n⏸ HOLD for 7 counts\n💨 Breathe OUT for 8 counts\n\nRepeat 3–4 times slowly. How do you feel after trying it?",
+          "Let's try box breathing:\n\n▶ Breathe IN for 4 counts\n▶ HOLD for 4 counts\n▶ Breathe OUT for 4 counts\n▶ HOLD for 4 counts\n\nTry 4 rounds slowly. 🌿"]
+    },
+    {
+      p: [/feel better/i,/getting better/i,/good day/i,/happy today/i,/doing well/i,/doing okay/i],
+      r: ["That's really wonderful to hear! 🌱 Even small moments of feeling better are meaningful. What's helped you today?",
+          "I'm genuinely glad to hear that. 💚 What's been bringing you some comfort lately?"]
+    },
+    {
+      p: [/hate myself/i,/not good enough/i,/worthless/i,/failure/i,/ashamed/i,/no confidence/i],
+      r: ["The way you're speaking about yourself sounds really painful. You are not those words. What happened that made you feel this way?",
+          "Those are harsh things to believe about yourself. You deserve more kindness — especially from yourself. Can you tell me more?"]
+    },
+    {
+      p: [/sleep/i,/insomnia/i,/can't sleep/i,/not sleeping/i,/nightmares/i,/tired all the time/i],
+      r: ["Sleep struggles and emotional pain often go hand in hand. How long have you been struggling to sleep?",
+          "Not sleeping is its own layer of exhaustion. Is your mind racing when you try to rest, or does sleep just not come?"]
+    },
+    {
+      p: [/thank you/i,/thanks/i,/that helped/i,/appreciate/i],
+      r: ["I'm really glad this feels helpful. 🌿 Is there anything else you'd like to explore?",
+          "Thank you for sharing with me — that takes courage. Is there more you'd like to talk through?"]
+    },
+    {
+      p: [/bye/i,/goodbye/i,/good night/i,/see you/i],
+      r: ["Take care of yourself. 🌿 You can come back any time you need to talk.",
+          "Goodbye for now. You reached out today, and that matters. 💚"]
+    },
+    /* CATCH-ALL — always keep this last */
+    {
+      p: [/.*/],
+      r: ["Thank you for sharing that. Can you tell me a little more about how you're feeling?",
+          "I hear you. Can you say more about what's been weighing on you?",
+          "I'm listening carefully. What feels most important to talk about right now?"],
+      c: ["I'm feeling low","I'm anxious","I feel lonely","I'm stressed"]
+    }
+  ];
+
+  /* ============================================================
+     ENGINE — no need to edit below this line
+  ============================================================ */
+  var uname = null;
+
+  function pick(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
+
+  function getReply(text){
+    var nm = text.match(/(?:my name is|call me)\s+([a-zA-Z]+)/i);
+    if(nm){ uname = nm[1]; return {t: "It's lovely to meet you, " + uname + ". 🌿 How are you feeling today?"}; }
+    for(var i = 0; i < rules.length; i++){
+      var rule = rules[i];
+      for(var j = 0; j < rule.p.length; j++){
+        if(rule.p[j].test(text)){
+          var txt = pick(rule.r);
+          if(uname && Math.random() < 0.3) txt = uname + ", " + txt.charAt(0).toLowerCase() + txt.slice(1);
+          return {t: txt, c: rule.c};
+        }
+      }
+    }
+    return {t: pick(rules[rules.length-1].r), c: rules[rules.length-1].c};
+  }
+
+  var mm  = document.getElementById('mm');
+  var mt  = document.getElementById('mt');
+  var mta = document.getElementById('mta');
+  var msb = document.getElementById('msb');
+
+  function addMsg(role, text, chips){
+    var wrap = document.createElement('div');
+    wrap.className = 'xm ' + role;
+    var lbl = document.createElement('div');
+    lbl.className = 'xl';
+    lbl.textContent = role === 'u' ? 'You' : 'ACINTA';
+    var bubble = document.createElement('div');
+    bubble.className = 'xb';
+    bubble.innerHTML = (text || '').replace(/\n/g, '<br>');
+    wrap.appendChild(lbl);
+    wrap.appendChild(bubble);
+    if(chips && chips.length && role === 'b'){
+      var cr = document.createElement('div');
+      cr.className = 'xc';
+      for(var i = 0; i < chips.length; i++){
+        var chip = document.createElement('span');
+        chip.className = 'xk';
+        chip.textContent = chips[i];
+        chip.setAttribute('data-v', chips[i]);
+        cr.appendChild(chip);
+      }
+      wrap.appendChild(cr);
+    }
+    mm.appendChild(wrap);
+    mm.scrollTop = mm.scrollHeight;
+  }
+
+  function doSend(text){
+    text = (text || '').trim();
+    if(!text || msb.disabled) return;
+    mta.value = '';
+    mta.style.height = 'auto';
+    msb.disabled = true;
+    addMsg('u', text, null);
+    mt.style.display = 'block';
+    mm.scrollTop = mm.scrollHeight;
+    setTimeout(function(){
+      mt.style.display = 'none';
+      var res = getReply(text);
+      addMsg('b', res.t, res.c);
+      msb.disabled = false;
+      mta.focus();
+    }, 800 + Math.floor(Math.random() * 600));
+  }
+
+  msb.addEventListener('click', function(){ doSend(mta.value); });
+  mta.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); doSend(mta.value); }
+  });
+  mta.addEventListener('input', function(){
+    mta.style.height = 'auto';
+    mta.style.height = Math.min(mta.scrollHeight, 120) + 'px';
+  });
+  mm.addEventListener('click', function(e){
+    if(e.target && e.target.classList.contains('xk')){
+      doSend(e.target.getAttribute('data-v') || e.target.textContent);
+    }
+  });
+
+  addMsg('b',
+    "Hello, I'm really glad you're here. 🌿 This is a safe, non-judgmental space. How are you feeling today?",
+    ["I'm feeling low","I'm anxious","I feel lonely","I'm stressed","Just need to talk"]
+  );
+
+})();
+</script>
+</body>
+</html>
