@@ -1,4 +1,4 @@
-# 🌿 MindEase — Mental Wellness Chatbot
+# 🌿 ACINTA — Mental Wellness Chatbot
 
 A free, rule-based mental wellness chatbot that runs entirely in the browser. No server, no API key, no cost. Just open the HTML file and it works.
 
